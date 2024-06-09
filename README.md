@@ -156,3 +156,13 @@ def enhance_header(assigns) do
 
  end
 ```
+
+Checking the output
+- Lastly we want to make sure that we are in fact getting our web components server rendered. So if you navigate to `localhost:4000/enhance` and inspect the page, you should see something like this.
+
+<img width="654" alt="Screen Shot 2024-06-09 at 12 28 08 PM" src="https://github.com/Benanna2019/enhance-ssr-elixir-phoenix/assets/65513685/22a0da79-15c5-4947-a238-3735ec63722f">
+
+If you look at the `<my-header></my-header>` element, you should see this attribute, `enhanced="✨"` signifying that you are using the enhance-ssr package to server render your custom elements. 
+
+Huzza! Much love to Extism, Enhance, Elixir, and Phoenix Liveview. So many cool things working together. 
+
