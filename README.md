@@ -21,11 +21,19 @@ Adding enhance-ssr/wasm
 - Create wasm directory
 - Download the enhance wasm file into local directory - `curl -L [https://github.com/enhance-dev/enhance-ssr-wasm/releases/download/v0.0.3/enhance-ssr.wasm.gz](https://github.com/enhance-dev/enhance-ssr-wasm/releases/download/v0.0.3/enhance-ssr.wasm.gz) | gunzip > wasm/enhance-ssr.wasm`
 
+A little extra setup (for a basic phoenix project)
+
+- find your router.ex file under `lib/[name_of_project]_web`
+- add a new route something similar to `live "/enhance", EnhanceLive` underneath the `get "/"`
+- now create a `live` folder in `lib/[name_of_project]_web`
+- now create an `enhance_live.ex` file
+- This will be the module that is responsible for our view when navigating to `localhost:4000/enhance`
+
 Creating an Extism Plugin
 
 - Look at extism elixir docs → Show that we need to create a plugin in a very specific way
   [https://extism.org/docs/quickstart/host-quickstart/](https://extism.org/docs/quickstart/host-quickstart/)
-- Create an Elixir/Phoenix module that ‘creates_plugin’
+- Create an Elixir/Phoenix module in `lib/[name_of_project]_web` called `SsrWebComponentsOnTheBeam.ConvertComponents` that ‘creates_plugin’
 
 ```elixir
 defmodule SsrWebComponentsOnTheBeam.ConvertComponents do
@@ -54,6 +62,7 @@ end
 - Pull up enhance documentation for what enhance expects as a function signature
   [GitHub - enhance-dev/enhance-ssr-wasm: Enhance SSR compiled for WASM](https://github.com/enhance-dev/enhance-ssr-wasm?tab=readme-ov-file#usage)
 - Create a ‘call_enhance_plugin’ function
+
   ```elixir
   defmodule SsrWebComponentsOnTheBeam.ConvertComponents do
       @wasm_plugin_path Path.expand("../../../wasm/enhance-ssr.wasm", __DIR__)
@@ -81,6 +90,7 @@ end
       end
   end
   ```
+
 - decode the output which should just be a variable called enhance
 - get the document off of the enhance output and return in in a the raw function in a `<%= =>` expression in a `~H` template
 
